@@ -4,9 +4,19 @@ import { User } from "@prisma/client";
 import { validationHandler } from "../handlers/validationHandler";
 import * as usersRepository from "../repositories/usersRepository";
 import { AppException } from "../exceptions/AppException";
+import { IUserMapped } from "../interfaces/IUserMapped";
 
 export const validateIdSchema = (id: number): void =>
   modelsHelper.validateId(id);
+
+export function getUserMapped(user: User): IUserMapped {
+  return {
+    name: user.name,
+    email: user.email,
+    createdAt: user.createdAt,
+    updatedAt: user.updatedAt,
+  };
+}
 
 export function validateUpdateSchema({ name, email, password }: User): void {
   const schema = joi.object({

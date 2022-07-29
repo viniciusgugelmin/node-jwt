@@ -31,7 +31,7 @@ export async function update(req: Request, res: Response) {
 
   await usersService.update({
     ...user,
-    id: +(id ?? user.id),
+    id: +(user.id ?? id),
   });
 
   res.json(
